@@ -1,0 +1,13 @@
+@model FAKKE_NEWS_MVC.Models.News
+@{
+    ViewData["Title"] = "Eliminar noticia";
+}
+<h2>@ViewData["Title"]</h2>
+<div class="alert alert-warning">¿Confirmas eliminar la noticia "@Model.Title"?</div>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+

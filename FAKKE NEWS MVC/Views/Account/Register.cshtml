@@ -1,0 +1,53 @@
+@model FAKKE_NEWS_MVC.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Registrar usuario";
+}
+<h2>@ViewData["Title"]</h2>
+<form asp-action="Register" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3 position-relative">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" id="registerPassword" />
+        <button type="button" class="btn btn-sm btn-outline-secondary position-absolute" style="top:32px; right:10px;" onclick="togglePwd('registerPassword', this)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/>
+              <path d="M8 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/>
+            </svg>
+        </button>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Role"></label>
+        <select asp-for="Role" class="form-select">
+            <option value="Editor">Editor</option>
+            <option value="Admin">Admin</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+<script>
+    function togglePwd(id, btn) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.type = el.type === 'password' ? 'text' : 'password';
+        btn.classList.toggle('btn-outline-secondary');
+        btn.classList.toggle('btn-outline-primary');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        const el = document.getElementById('registerPassword');
+        if (el) el.type = 'password';
+    });
+</script>
+
+

@@ -1,0 +1,56 @@
+# Playwright test artifacts
+tests/e2e/**/*.png filter=lfs diff=lfs merge=lfs -text
+tests/e2e/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+tests/e2e/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+tests/e2e/**/*.gif filter=lfs diff=lfs merge=lfs -text
+tests/e2e/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+tests/e2e/**/*.webm filter=lfs diff=lfs merge=lfs -text
+tests/e2e/**/*.mov filter=lfs diff=lfs merge=lfs -text
+tests/e2e/**/*.avi filter=lfs diff=lfs merge=lfs -text
+
+# Playwright reports
+playwright-report/**/*.png filter=lfs diff=lfs merge=lfs -text
+playwright-report/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+playwright-report/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+playwright-report/**/*.webm filter=lfs diff=lfs merge=lfs -text
+
+# Test videos and screenshots
+test-results/**/*.png filter=lfs diff=lfs merge=lfs -text
+test-results/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+test-results/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+test-results/**/*.webm filter=lfs diff=lfs merge=lfs -text
+
+# Lighthouse reports
+lighthouse-report.html filter=lfs diff=lfs merge=lfs -text
+lighthouse-report.json filter=lfs diff=lfs merge=lfs -text
+
+# Bundle analysis
+dist/stats.html filter=lfs diff=lfs merge=lfs -text
+
+# Large media files
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
+*.webm filter=lfs diff=lfs merge=lfs -text
+*.mkv filter=lfs diff=lfs merge=lfs -text
+
+# Large images (over 1MB)
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.webp filter=lfs diff=lfs merge=lfs -text
+*.svg filter=lfs diff=lfs merge=lfs -text
+
+# Archives
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+*.rar filter=lfs diff=lfs merge=lfs -text
+*.7z filter=lfs diff=lfs merge=lfs -text
+
+# Documents
+*.pdf filter=lfs diff=lfs merge=lfs -text
+*.doc filter=lfs diff=lfs merge=lfs -text
+*.docx filter=lfs diff=lfs merge=lfs -text
+*.xls filter=lfs diff=lfs merge=lfs -text
+*.xlsx filter=lfs diff=lfs merge=lfs -text

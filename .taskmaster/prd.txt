@@ -1,0 +1,88 @@
+Proyecto: Plataforma de noticias (Admin MVC + API REST + SPA pública)
+
+Contexto actual
+- Existen tres proyectos: API REST (.NET), Admin MVC (con Identity, roles Administrador/Editor) y una SPA en Vue 3 + Vite para consulta pública.
+- La SPA ya consume países y categorías, pero las noticias no estaban llegando por URL base mal construida. Se requiere robustecer la configuración y estados de UI.
+
+Objetivo general
+- Entregar una SPA pública moderna, responsive, editorial y accesible que permita consultar noticias por país, por categoría o por término de búsqueda usando la API REST.
+- Mantener un diseño inspirado en sitios editoriales (WSJ / The New Yorker) con acentos de uiverse.io para microinteracciones.
+
+Requisitos funcionales (SPA)
+1) Navegación y rutas
+   - Home con feed de noticias paginadas/infinite scroll.
+   - Vista por categoría: /category/:id.
+   - Vista por país: /country/:id.
+   - Búsqueda: /search/:q? con query reactiva.
+   - Vista de artículo: /article/:id.
+
+2) Integración API REST
+   - Configurar base URL mediante VITE_API_BASE y fallback local.
+   - Endpoints: /api/news (paginación, filtros countryId, categoryId, search), /api/news/:id, /api/categories, /api/countries.
+   - Manejo de errores y reintentos mínimos en cliente (mostrar estados vacíos/errores).
+
+3) Filtros y estado
+   - Filtros por país y categoría, búsqueda por término, combinables.
+   - Mostrar contador total y paginación/infinite scroll accesible.
+
+Requisitos de estilo/UX (SPA)
+4) Tipografía editorial
+   - Titulares con serif (Georgia o equivalente del sistema), cuerpo con system-ui.
+   - Escalas tipográficas y ritmo vertical de estilo “magazine”.
+
+5) Página de artículo
+   - Subtítulo/lead opcional antes del cuerpo.
+   - Drop-cap opcional en el primer párrafo.
+   - Imagen hero a ancho completo (responsive) con capción opcional.
+   - Metadatos mejorados: categoría, país, fecha, autor.
+
+6) Barra de secciones
+   - Tags/sections destacados, estado activo/hover, sticky debajo del header.
+
+7) Estados vacíos y de error
+   - Home y Search con mensajes claros, iconografía ligera y CTA para volver/limpiar filtros.
+
+8) Modo oscuro y microanimaciones
+   - Toggle dark mode (persistencia en localStorage).
+   - Microanimaciones en hover/focus tomando inspiración de uiverse.io.
+
+9) Favicon/manifest
+   - Generar favicon(s) y manifest.json usando el nuevo isologo.
+
+10) Responsive y layout
+   - Corregir distribución en desktop/tablet/mobile (grillas, gutters, máximos de ancho, cards consistentes).
+   - Asegurar accesibilidad (contraste, focus rings, roles ARIA en tarjetas y navegación).
+
+Requisitos Admin MVC
+11) Autenticación basada en Cookies ya operativa.
+   - Rol Administrador: CRUD de categorías, países, usuarios y ver noticias de todos.
+   - Rol Editor: CRUD solo de sus noticias.
+   - Subir imágenes (validación tamaño/tipo), almacenar ruta accesible para la SPA.
+
+Requisitos API REST
+12) Endpoints consistentes con la SPA, con paginación y filtros.
+   - Validaciones, códigos de error claros, CORS adecuado.
+
+No-funcionales
+13) Performance
+   - Imágenes con lazy-loading y tamaños adecuados; skeletons y prefetch.
+   - Cache ligera en cliente para peticiones repetidas.
+
+14) Calidad
+   - Tipado TS estricto en SPA, linter sin errores, build de producción limpia.
+
+Entregables
+- SPA refinada con diseño editorial completo y dark mode.
+- Admin MVC con roles, CRUDs y cargas de imagen.
+- API REST documentada (README o Swagger) y consumida por la SPA.
+
+Hitos sugeridos
+1. Conectar y estabilizar API (base URL, estados vacíos/errores).
+2. Estilización global: tipografía, layout y navegación.
+3. Página de artículo (lead, hero, metadatos, drop-cap).
+4. Barra de secciones (tags) con estados activos.
+5. Dark mode + microanimaciones.
+6. Favicon/manifest con isologo.
+7. QA responsive y accesibilidad.
+
+
