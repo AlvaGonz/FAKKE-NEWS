@@ -1,0 +1,253 @@
+### FAKKE NEWS API Tests
+### Base URL: https://localhost:7000 (ajustar según tu puerto)
+
+### ============================================
+### CATEGORIES TESTS
+### ============================================
+
+### GET All Categories
+GET https://localhost:7000/api/Categories
+Accept: application/json
+
+###
+
+### GET Category by ID
+GET https://localhost:7000/api/Categories/1
+Accept: application/json
+
+###
+
+### POST Create New Category
+POST https://localhost:7000/api/Categories
+Content-Type: application/json
+
+{
+  "name": "Deportes"
+}
+
+###
+
+### PUT Update Category
+PUT https://localhost:7000/api/Categories/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Política Actualizada"
+}
+
+###
+
+### DELETE Category
+DELETE https://localhost:7000/api/Categories/999
+Accept: application/json
+
+###
+
+### ============================================
+### COUNTRIES TESTS
+### ============================================
+
+### GET All Countries
+GET https://localhost:7000/api/Countries
+Accept: application/json
+
+###
+
+### GET Country by ID
+GET https://localhost:7000/api/Countries/1
+Accept: application/json
+
+###
+
+### POST Create New Country
+POST https://localhost:7000/api/Countries
+Content-Type: application/json
+
+{
+  "name": "España"
+}
+
+###
+
+### PUT Update Country
+PUT https://localhost:7000/api/Countries/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Estados Unidos Actualizado"
+}
+
+###
+
+### DELETE Country
+DELETE https://localhost:7000/api/Countries/999
+Accept: application/json
+
+###
+
+### ============================================
+### NEWS TESTS
+### ============================================
+
+### GET All News (with pagination)
+GET https://localhost:7000/api/news?page=1&pageSize=5
+Accept: application/json
+
+###
+
+### GET All News with Search Filter
+GET https://localhost:7000/api/news?search=política&page=1&pageSize=10
+Accept: application/json
+
+###
+
+### GET All News with Country Filter
+GET https://localhost:7000/api/news?countryId=1&page=1&pageSize=10
+Accept: application/json
+
+###
+
+### GET All News with Category Filter
+GET https://localhost:7000/api/news?categoryId=1&page=1&pageSize=10
+Accept: application/json
+
+###
+
+### GET All News with Multiple Filters
+GET https://localhost:7000/api/news?search=economía&countryId=1&categoryId=2&page=1&pageSize=5
+Accept: application/json
+
+###
+
+### GET News by ID
+GET https://localhost:7000/api/news/1
+Accept: application/json
+
+###
+
+### GET News by Country
+GET https://localhost:7000/api/news/ByCountry/1
+Accept: application/json
+
+###
+
+### GET News by Category
+GET https://localhost:7000/api/news/ByCategory/1
+Accept: application/json
+
+###
+
+### GET News by Search Term
+GET https://localhost:7000/api/news/Search/tecnología
+Accept: application/json
+
+###
+
+### POST Create New News
+POST https://localhost:7000/api/news
+Content-Type: application/json
+
+{
+  "title": "Nueva Noticia de Prueba",
+  "content": "Este es el contenido de la noticia de prueba creada desde la API.",
+  "publicationDate": "2025-08-18T12:00:00",
+  "countryId": 1,
+  "categoryId": 1,
+  "authorId": "<identity-user-guid>"
+}
+
+###
+
+### PUT Update News
+PUT https://localhost:7000/api/news/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Noticia Actualizada",
+  "content": "Contenido actualizado de la noticia.",
+  "publicationDate": "2025-08-18T12:30:00",
+  "countryId": 1,
+  "categoryId": 1,
+  "authorId": "<identity-user-guid>"
+}
+
+###
+
+### DELETE News
+DELETE https://localhost:7000/api/news/999
+Accept: application/json
+
+###
+
+### ============================================
+### USERS TESTS
+### ============================================
+
+### GET All Users
+GET https://localhost:7000/api/users
+Accept: application/json
+
+###
+
+### GET User by ID
+GET https://localhost:7000/api/users/<identity-user-guid>
+Accept: application/json
+
+###
+
+### ============================================
+### ERROR HANDLING TESTS
+### ============================================
+
+### GET Non-existent Category
+GET https://localhost:7000/api/Categories/9999
+Accept: application/json
+
+###
+
+### GET Non-existent Country
+GET https://localhost:7000/api/Countries/9999
+Accept: application/json
+
+###
+
+### GET Non-existent News
+GET https://localhost:7000/api/news/9999
+Accept: application/json
+
+###
+
+### GET Non-existent User
+GET https://localhost:7000/api/Users/9999
+Accept: application/json
+
+###
+
+### POST Invalid Category (empty name)
+POST https://localhost:7000/api/Categories
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+###
+
+### PUT Invalid News (wrong ID)
+PUT https://localhost:7000/api/News/1
+Content-Type: application/json
+
+{
+  "id": 999,
+  "title": "Título",
+  "content": "Contenido",
+  "publicationDate": "2025-08-18T12:00:00",
+  "countryId": 1,
+  "categoryId": 1,
+  "authorId": 1
+}
+
+###

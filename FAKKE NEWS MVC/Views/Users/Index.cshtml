@@ -1,0 +1,90 @@
+@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewData["Title"] = "Usuarios";
+    var total = (int)(ViewBag.Total ?? 0);
+    var page = (int)(ViewBag.Page ?? 1);
+    var pageSize = (int)(ViewBag.PageSize ?? 10);
+    var search = (string)(ViewBag.Search ?? "");
+    var totalPages = (int)Math.Ceiling(total / (double)pageSize);
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-sm-4">
+        <input name="search" class="form-control" value="@search" placeholder="Buscar usuario o email" />
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-secondary">Buscar</button>
+    </div>
+    <div class="col-auto ms-auto">
+        <select name="pageSize" class="form-select" onchange="this.form.submit()">
+            <option value="10" selected="@(pageSize==10)">10</option>
+            <option value="20" selected="@(pageSize==20)">20</option>
+            <option value="50" selected="@(pageSize==50)">50</option>
+        </select>
+    </div>
+    </form>
+
+<table class="table align-middle">
+    <thead>
+    <tr>
+        <th>Usuario</th>
+        <th>Email</th>
+        <th>Bloqueo</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.UserName</td>
+            <td>@u.Email</td>
+            <td>
+                @if ((u.LockoutEnd ?? DateTimeOffset.MinValue) > DateTimeOffset.UtcNow) {<span class="badge text-bg-danger">Bloqueado</span>} else {<span class="badge text-bg-success">Activo</span>}
+            </td>
+            <td>
+                <form asp-action="SetRole" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@u.Id" />
+                    <select name="role" class="form-select form-select-sm d-inline w-auto">
+                        <option>Editor</option>
+                        <option>Admin</option>
+                    </select>
+                    <button class="btn btn-sm btn-secondary">Cambiar rol</button>
+                </form>
+                @if ((u.LockoutEnd ?? DateTimeOffset.MinValue) > DateTimeOffset.UtcNow)
+                {
+                    <form asp-action="Unlock" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@u.Id" />
+                        <button class="btn btn-sm btn-success">Desbloquear</button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-action="Lock" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@u.Id" />
+                        <button class="btn btn-sm btn-danger">Bloquear</button>
+                    </form>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (totalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item @(i==page?"active":null)">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i, pageSize, search })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
+
+

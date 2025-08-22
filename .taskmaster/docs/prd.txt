@@ -1,0 +1,96 @@
+Proyecto: Plataforma de noticias (Admin MVC + API REST + SPA pública)
+
+Contexto actual
+- Existen tres proyectos: API REST (.NET), Admin MVC (con Identity, roles Administrador/Editor) y una SPA en Vue 3 + Vite para consulta pública.
+- La SPA ya consume países y categorías. Incidencia corregida: 404 por base URL sin `/api`; el cliente ahora respeta `VITE_API_BASE` y preserva `pathname`.
+
+Objetivo general
+- Entregar una SPA pública moderna, responsive, editorial y accesible que permita consultar noticias por país, por categoría o por término de búsqueda usando la API REST.
+- Mantener un diseño inspirado en sitios editoriales (WSJ / The New Yorker) con acentos de uiverse.io para microinteracciones.
+
+Requisitos funcionales (SPA)
+1) Navegación y rutas
+   - Home con feed de noticias paginadas/infinite scroll.
+   - Vista por categoría: /category/:id.
+   - Vista por país: /country/:id.
+   - Búsqueda: /search/:q? con query reactiva.
+   - Vista de artículo: /article/:id.
+
+2) Integración API REST
+   - `VITE_API_BASE` configurable (p. ej., `https://localhost:7258/api`).
+   - Endpoints: `/api/news` (GET con `page`, `pageSize`, `countryId?`, `categoryId?`, `search?`), `/api/news/:id`, `/api/categories`, `/api/countries`.
+   - Estados en cliente: loading, vacío, error; manejo de 4xx/5xx con mensajes claros y acción de reintento o limpiar filtros.
+
+3) Filtros y estado
+   - Filtros por país y categoría, búsqueda por término, combinables.
+   - Contador total y paginación/infinite scroll accesible con `IntersectionObserver`.
+
+Requisitos de estilo/UX (SPA)
+4) Tipografía editorial
+   - Titulares con serif (Georgia o equivalente del sistema), cuerpo con system-ui.
+   - Escalas tipográficas y ritmo vertical de estilo “magazine”.
+
+5) Página de artículo
+   - Subtítulo/lead opcional antes del cuerpo.
+   - Drop-cap opcional en el primer párrafo.
+   - Imagen hero a ancho completo (responsive) con capción opcional.
+   - Metadatos mejorados: categoría, país, fecha, autor.
+   - Botones de compartir y enlaces a categoría/país.
+
+6) Barra de secciones
+   - Tags/sections destacados, estado activo/hover, sticky debajo del header.
+   - Estado activo sincronizado con ruta; navegación por teclado accesible.
+
+7) Estados vacíos y de error
+   - Home y Search con mensajes claros, iconografía ligera y CTA para volver/limpiar filtros.
+   - Plantillas de error para 404/500 con acción de retry.
+
+8) Modo oscuro y microanimaciones
+   - Toggle dark mode (persistencia en localStorage).
+   - Microanimaciones en hover/focus inspiradas en uiverse.
+
+9) Favicon/manifest
+   - Generar favicon(s) y manifest.json usando el nuevo isologo.
+
+10) Responsive y layout
+    - Corregir distribución en desktop/tablet/mobile (grillas, gutters, máximos de ancho, cards consistentes).
+    - Asegurar accesibilidad (contraste, focus rings, roles ARIA en tarjetas y navegación).
+    - Ajustar columnas y gutters en desktop para evitar vacíos; breakpoints revisados.
+    - Menús desplegables (categorías/países) con teclado y estado activo.
+    - Dropdowns estilizados en filtros con animaciones y z-index correcto.
+
+Requisitos Admin MVC
+11) Autenticación basada en Cookies ya operativa.
+   - Rol Administrador: CRUD de categorías, países, usuarios y ver noticias de todos.
+   - Rol Editor: CRUD solo de sus noticias.
+   - Subir imágenes (validación tamaño/tipo), almacenar ruta accesible para la SPA.
+
+Requisitos API REST
+12) Endpoints consistentes con la SPA, con paginación y filtros.
+   - Validaciones, códigos de error claros, CORS adecuado.
+
+No-funcionales
+13) Performance
+   - Imágenes con lazy-loading y tamaños adecuados; skeletons y prefetch.
+   - Cache ligera en cliente para peticiones repetidas; control de TTL por query.
+
+14) Calidad
+   - Tipado TS estricto en SPA, linter sin errores, build de producción limpia.
+   - Lighthouse targets: >= 85 móvil, >= 95 desktop; sin errores de accesibilidad críticas.
+
+Entregables
+- SPA refinada con diseño editorial completo y dark mode.
+- Admin MVC con roles, CRUDs y cargas de imagen.
+- API REST documentada (README o Swagger) y consumida por la SPA.
+ - Configuración de entorno: `VITE_API_BASE`, `VITE_ASSET_ORIGIN` para imágenes.
+
+Hitos sugeridos (Roadmap)
+1. Conectar y estabilizar API (base URL, estados vacíos/errores) [Día 1-2].
+2. Estilización global: tipografía, layout, header/sections [Día 3-4].
+3. Página de artículo (lead, hero, metadatos, drop-cap) [Día 5].
+4. Estados vacíos/errores + contador/infinite scroll [Día 6].
+5. Dark mode + microanimaciones (uiverse) [Día 7].
+6. Favicon/manifest con isologo [Día 8].
+7. QA responsive + a11y + Lighthouse [Día 9].
+
+

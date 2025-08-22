@@ -1,0 +1,51 @@
+@model FAKKE_NEWS_MVC.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Iniciar sesión";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <h2>@ViewData["Title"]</h2>
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="form-group mb-3">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 position-relative">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" id="loginPassword" />
+                <button type="button" class="btn btn-sm btn-outline-secondary position-absolute" style="top:32px; right:10px;" onclick="togglePwd('loginPassword', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/>
+                      <path d="M8 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/>
+                    </svg>
+                </button>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" asp-for="RememberMe" id="rememberMe" />
+                <label class="form-check-label" asp-for="RememberMe"></label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            <div class="mt-2 text-center">
+                <a asp-controller="Account" asp-action="ForgotPassword" class="link-secondary">¿Olvidaste tu contraseña?</a>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+<script>
+    function togglePwd(id, btn) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.type = el.type === 'password' ? 'text' : 'password';
+        btn.classList.toggle('btn-outline-secondary');
+        btn.classList.toggle('btn-outline-primary');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        const el = document.getElementById('loginPassword');
+        if (el) el.type = 'password';
+    });
+</script>

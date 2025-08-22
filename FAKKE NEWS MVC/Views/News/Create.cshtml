@@ -1,0 +1,40 @@
+@model FAKKE_NEWS_MVC.Models.News
+@{
+    ViewData["Title"] = "Nueva noticia";
+}
+<h2>@ViewData["Title"]</h2>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group mb-3">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="PublicationDate"></label>
+        <input asp-for="PublicationDate" type="datetime-local" class="form-control" />
+        <span asp-validation-for="PublicationDate" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="CountryId"></label>
+        <select asp-for="CountryId" asp-items="ViewBag.Countries" class="form-select"></select>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="CategoryId"></label>
+        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label>Imagen</label>
+        <input type="file" name="image" class="form-control" accept="image/*" />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+    </form>
+
+

@@ -1,0 +1,366 @@
+{
+  "info": {
+    "name": "FAKKE NEWS API",
+    "description": "Complete API tests for FAKKE NEWS application",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:7000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Categories"]
+            }
+          }
+        },
+        {
+          "name": "Get Category by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Categories/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Categories", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Deportes\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/Categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Categories"]
+            }
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"name\": \"Política Actualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/Categories/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Categories", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Categories/999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Categories", "999"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Countries",
+      "item": [
+        {
+          "name": "Get All Countries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Countries",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Countries"]
+            }
+          }
+        },
+        {
+          "name": "Get Country by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Countries/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Countries", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Country",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"España\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/Countries",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Countries"]
+            }
+          }
+        },
+        {
+          "name": "Update Country",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"name\": \"Estados Unidos Actualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/Countries/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Countries", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Country",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Countries/999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Countries", "999"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "News",
+      "item": [
+        {
+          "name": "Get All News (Paginated)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/News?page=1&pageSize=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get News with Search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/News?search=política&page=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "política"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get News by Country",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/News/ByCountry/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News", "ByCountry", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get News by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/News/ByCategory/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News", "ByCategory", "1"]
+            }
+          }
+        },
+        {
+          "name": "Search News",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/News/Search/tecnología",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News", "Search", "tecnología"]
+            }
+          }
+        },
+        {
+          "name": "Get News by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/News/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create News",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Nueva Noticia de Prueba\",\n  \"content\": \"Este es el contenido de la noticia de prueba creada desde la API.\",\n  \"publicationDate\": \"2025-08-18T12:00:00\",\n  \"countryId\": 1,\n  \"categoryId\": 1,\n  \"authorId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/News",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News"]
+            }
+          }
+        },
+        {
+          "name": "Update News",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"title\": \"Noticia Actualizada\",\n  \"content\": \"Contenido actualizado de la noticia.\",\n  \"publicationDate\": \"2025-08-18T12:30:00\",\n  \"countryId\": 1,\n  \"categoryId\": 1,\n  \"authorId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/News/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete News",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/News/999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "News", "999"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Users"]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Users", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+# Example PRD (adaptado a plataforma de noticias)
+
+## 1. Contexto y problema
+- ¿Qué problema resolvemos? Consumo público de noticias con filtros por país, categoría y búsqueda, y backoffice para gestión.
+- Estado actual: Admin MVC y API en .NET; SPA en Vue 3 con Vite. Se detectó error de base URL (404) ya corregido en cliente.
+
+## 2. Objetivos (Goals)
+- SPA pública responsive, editorial y accesible.
+- Búsqueda/filtros por país y categoría; vista de artículo.
+- Diseño editorial (WSJ/NYer) + microinteracciones uiverse.
+
+## 3. No objetivos (Non-goals)
+- No paywall, no comments, no login en SPA pública.
+
+## 4. Usuarios y casos de uso
+- Lector: descubre, filtra y lee noticias.
+- Editor/Administrador (Admin MVC): crea/edita noticias, categorías, países y usuarios (según rol).
+
+## 5. Requisitos funcionales
+- Rutas SPA: `/`, `/category/:id`, `/country/:id`, `/search/:q?`, `/article/:id`.
+- API: `/api/news` (paged + filtros), `/api/news/:id`, `/api/categories`, `/api/countries`.
+- Estados: loading, vacío, error. Infinite scroll.
+
+## 6. Requisitos no funcionales
+- Performance (lazy images, cache ligera), accesibilidad AA, tipado TS estricto, CORS correcto.
+
+## 7. UX/UI
+- Tipografía editorial (serif headlines + system text), ritmo vertical.
+- Página de artículo: lead, drop-cap opcional, hero full-bleed, metadatos.
+- Barra de secciones con tags y estado activo; dark mode; microanimaciones.
+- Favicon/manifest con isologo.
+
+## 8. Aceptación (Acceptance Criteria)
+- Todas las rutas devuelven contenido válido con/ sin filtros y muestran estados vacíos/errores.
+- Build prod sin errores; Lighthouse >= 85 móvil/95 desktop.
+
+## 9. Entregables
+- SPA (prod), Admin MVC (roles y CRUD), API documentada.
+
+## 10. Hitos
+1) Conectar API y estados.
+2) Estilo global + header/sections.
+3) Página de artículo.
+4) Dark mode + microinteracciones.
+5) Favicon/manifest.
+6) QA responsive + a11y.
+
+## 11. Riesgos
+- Inconsistencias de contrato API, assets grandes, CORS.
+
+## 12. Métricas de éxito
+- TTFB, LCP, CLS, tiempo a primer noticia, tasa de rebote.
+
+<context>
+# Overview  
+[Provide a high-level overview of your product here. Explain what problem it solves, who it's for, and why it's valuable.]
+
+# Core Features  
+[List and describe the main features of your product. For each feature, include:
+- What it does
+- Why it's important
+- How it works at a high level]
+
+# User Experience  
+[Describe the user journey and experience. Include:
+- User personas
+- Key user flows
+- UI/UX considerations]
+</context>
+<PRD>
+# Technical Architecture  
+[Outline the technical implementation details:
+- System components
+- Data models
+- APIs and integrations
+- Infrastructure requirements]
+
+# Development Roadmap  
+[Break down the development process into phases:
+- MVP requirements
+- Future enhancements
+- Do not think about timelines whatsoever -- all that matters is scope and detailing exactly what needs to be build in each phase so it can later be cut up into tasks]
+
+# Logical Dependency Chain
+[Define the logical order of development:
+- Which features need to be built first (foundation)
+- Getting as quickly as possible to something usable/visible front end that works
+- Properly pacing and scoping each feature so it is atomic but can also be built upon and improved as development approaches]
+
+# Risks and Mitigations  
+[Identify potential risks and how they'll be addressed:
+- Technical challenges
+- Figuring out the MVP that we can build upon
+- Resource constraints]
+
+# Appendix  
+[Include any additional information:
+- Research findings
+- Technical specifications]
+</PRD>
