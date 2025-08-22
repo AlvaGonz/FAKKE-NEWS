@@ -1,0 +1,165 @@
+<script setup lang="ts">
+import { onMounted, computed, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { useNews, type NewsItem } from '@/composables/useNews';
+import NewsCard from '@/components/news/NewsCard.vue';
+import NewsSkeleton from '@/components/news/NewsSkeleton.vue';
+import EmptyState from '@/components/news/EmptyState.vue';
+import { useIntersection } from '@/composables/useIntersection';
+
+const route = useRoute();
+const n = useNews();
+const items = computed<NewsItem[]>(() => (n.list as any as import('vue').Ref<NewsItem[]>).value ?? []);
+
+// Watch for route changes and update filter
+watch(() => route.params.id, async (newId) => {
+  if (newId) {
+    await n.setCategoryFilter(Number(newId));
+  }
+}, { immediate: true });
+
+// Get category name from first item
+const categoryName = computed(() => {
+  if (items.value.length > 0 && items.value[0].categoryName) {
+    return items.value[0].categoryName;
+  }
+  return 'Categoría';
+});
+
+onMounted(async () => {
+  if (route.params.id) {
+    await n.setCategoryFilter(Number(route.params.id));
+  }
+});
+
+// Infinite scroll
+const { el } = useIntersection(async () => {
+  if (n.page.value < n.totalPages.value && !n.isLoading.value) {
+    n.page.value++;
+    await n.fetchList();
+  }
+});
+</script>
+
+<template>
+  <main class="container">
+    <div class="content">
+      <!-- Page Header -->
+      <header class="page-header" v-if="n.total.value > 0">
+        <div class="page-info">
+          <h1 class="page-title">Noticias por categoría: {{ categoryName }}</h1>
+          <p class="page-count">
+            {{ n.total.value }} {{ n.total.value === 1 ? 'artículo' : 'artículos' }}
+            <span v-if="n.page.value > 1" class="page-info">
+              (página {{ n.page.value }} de {{ n.totalPages.value }})
+            </span>
+          </p>
+        </div>
+      </header>
+
+      <!-- News Grid -->
+      <section class="grid">
+        <template v-if="items.length">
+          <NewsCard v-for="item in items" :key="item.id" :item="item" />
+        </template>
+        <template v-else-if="n.isLoading.value && n.page.value === 1">
+          <NewsSkeleton v-for="i in 6" :key="'s-'+i" />
+        </template>
+        <template v-else>
+          <EmptyState 
+            message="No se encontraron noticias en esta categoría"
+            @retry="n.fetchList" 
+            @clear="n.clearFilters" 
+          />
+        </template>
+      </section>
+
+      <!-- Infinite Scroll Loading -->
+      <div v-if="n.isLoading.value && n.page.value > 1" class="loading-more">
+        <div class="loading-spinner"></div>
+        <p>Cargando más artículos...</p>
+      </div>
+
+      <!-- End of Results -->
+      <div v-if="n.page.value >= n.totalPages.value && items.length > 0" class="end-results">
+        <p>Has llegado al final de los resultados</p>
+      </div>
+
+      <!-- Infinite Scroll Sentinel -->
+      <div ref="el" class="sentinel" aria-hidden="true"></div>
+    </div>
+  </main>
+</template>
+
+<style scoped>
+.content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #111;
+  margin: 0 0 0.5rem 0;
+}
+
+.page-count {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.page-info {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.loading-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  color: #666;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.end-results {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+  font-style: italic;
+  border-top: 1px solid #eee;
+  margin-top: 2rem;
+}
+
+.sentinel {
+  height: 1px;
+  margin-top: 2rem;
+}
+</style>
+
+

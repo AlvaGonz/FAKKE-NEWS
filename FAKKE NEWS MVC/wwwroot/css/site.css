@@ -1,0 +1,133 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* ---- Newspaper theme additions ---- */
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+}
+
+.navbar {
+  background: #ffffff;
+  border-bottom: 3px solid #c91d1d;
+  transition: box-shadow .2s ease-in-out;
+}
+.navbar:hover {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.btn-primary {
+  background-color: #c91d1d;
+  border-color: #b11919;
+  transition: transform .08s ease, box-shadow .2s ease;
+}
+.btn-primary:hover {
+  background-color: #b11919;
+  border-color: #951313;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(201,29,29,.25);
+}
+
+.btn-secondary {
+  transition: transform .08s ease, box-shadow .2s ease;
+}
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.1);
+}
+
+.table thead th {
+  border-bottom: 2px solid #c91d1d;
+}
+
+.container > main {
+  background: #fff;
+  border-radius: 10px;
+  padding: 22px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+}
+
+a.nav-link.text-dark {
+  position: relative;
+}
+a.nav-link.text-dark::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  height: 2px;
+  width: 0;
+  background: #c91d1d;
+  transition: width .2s ease;
+}
+a.nav-link.text-dark:hover::after {
+  width: 100%;
+}
+
+/* ---- Modern greys and subtle gradients ---- */
+.bg-white {
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%) !important;
+}
+
+.footer {
+  background: linear-gradient(180deg, #f4f4f4 0%, #eaeaea 100%);
+}
+
+.table {
+  background-color: #fff;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0,0,0,.015);
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  border-color: #ddd;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #c91d1d;
+  box-shadow: 0 0 0 .15rem rgba(201,29,29,.15);
+}
+
+.card-like {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 8px 20px rgba(0,0,0,.05);
+}

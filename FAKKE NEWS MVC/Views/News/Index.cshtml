@@ -1,0 +1,38 @@
+@model IEnumerable<FAKKE_NEWS_MVC.Models.News>
+@{
+    ViewData["Title"] = "Noticias";
+}
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nueva noticia</a>
+    </p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Título</th>
+        <th>Fecha</th>
+        <th>PaísId</th>
+        <th>CategoríaId</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Title</td>
+            <td>@item.PublicationDate.ToString("yyyy-MM-dd HH:mm")</td>
+            <td>@item.CountryId</td>
+            <td>@item.CategoryId</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Editar</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
