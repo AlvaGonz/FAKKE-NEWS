@@ -44,6 +44,8 @@ app.UseCors("AllowSPA");
 
 app.UseAuthorization();
 
+app.MapGet("/scalar", () => Results.Redirect("/scalar/v1")).ExcludeFromDescription();
+
 app.MapControllers();
 
 app.Run();

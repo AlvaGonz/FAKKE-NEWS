@@ -7,15 +7,15 @@ import EmptyState from '@/components/news/EmptyState.vue';
 import { useIntersection } from '@/composables/useIntersection';
 
 const n = useNews();
-const items = computed<NewsItem[]>(() => (n.list as any as import('vue').Ref<NewsItem[]>).value ?? []);
+const items = computed<NewsItem[]>(() => n.list.value ?? []);
 
 onMounted(n.fetchList);
 
 // Infinite scroll with better loading state
 const { el } = useIntersection(async () => {
   if (n.page.value < n.totalPages.value && !n.isLoading.value) {
-    n.page.value++; 
-    await n.fetchList();
+    // n.page.value++; // logic moved to loadMore
+    await n.loadMore();
   }
 });
 </script>
