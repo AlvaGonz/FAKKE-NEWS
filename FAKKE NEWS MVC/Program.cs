@@ -79,6 +79,11 @@ app.MapRazorPages()
    .WithStaticAssets();
 
 // Seed roles and default admin
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate();
+}
 await IdentitySeeder.SeedAsync(app.Services);
 
 app.Run();
