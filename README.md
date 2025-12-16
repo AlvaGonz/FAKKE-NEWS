@@ -75,7 +75,7 @@ FAKKE NEWS/
 
 ### Prerrequisitos
 - Node.js 18+ y npm
-- .NET 8 SDK
+- .NET 9 SDK
 - SQL Server (LocalDB o Express)
 - Git con LFS
 

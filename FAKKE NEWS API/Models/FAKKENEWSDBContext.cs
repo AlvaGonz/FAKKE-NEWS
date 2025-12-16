@@ -63,6 +63,7 @@ public partial class FAKKENEWSDBContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
+            entity.ToTable("ApiUsers");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasMaxLength(450);
             entity.Property(e => e.PasswordHash).IsRequired();
