@@ -188,21 +188,26 @@ onMounted(async () => {
       </div>
     </footer>
 
-    <!-- Image Modal -->
-    <div v-if="showImageModal" class="image-modal" @click="closeImageModal">
+    <!-- New Yorker Style Image Modal -->
+    <div v-if="showImageModal" class="image-modal ny-modal" @click="closeImageModal">
       <div class="modal-content" @click.stop>
-        <button class="modal-close" @click="closeImageModal" aria-label="Cerrar">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button class="modal-close" @click="closeImageModal" aria-label="Close">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <line x1="18" y1="6" x2="6" y2="18"/>
             <line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
-        <img 
-          :src="resolveImageUrl(item.imagePath)" 
-          :alt="item.title" 
-          class="modal-image"
-          @click="closeImageModal"
-        />
+        <figure class="modal-figure">
+          <img 
+            :src="resolveImageUrl(item.imagePath)" 
+            :alt="item.title" 
+            class="modal-image"
+          />
+          <figcaption class="modal-caption">
+            {{ item.title }}
+            <span class="modal-credit" v-if="item.authorName">Photograph by {{ item.authorName }}</span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </main>
@@ -484,47 +489,71 @@ onMounted(async () => {
   background: #4b5563;
 }
 
-/* Image Modal */
-.image-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
+/* New Yorker Lightbox Modal */
+.image-modal.ny-modal {
+  background: rgba(255, 255, 255, 0.98); /* White overlay */
+  backdrop-filter: blur(5px);
+  color: #111;
+}
+
+.ny-modal .modal-content {
+  max-width: 1200px;
+  width: 90vw;
+  box-shadow: none;
+  background: transparent;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 2rem;
 }
 
-.modal-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-.modal-close {
+.ny-modal .modal-close {
   position: absolute;
-  top: -40px;
+  top: -60px;
   right: 0;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
+  color: #333;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.2s;
 }
 
-.modal-close:hover {
-  background: rgba(255, 255, 255, 0.1);
+.ny-modal .modal-close:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.modal-figure {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal-image {
-  width: 100%;
-  height: auto;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 8px;
+  max-height: 80vh;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1); /* Elegant shadow */
+  border-radius: 2px;
+}
+
+.modal-caption {
+  margin-top: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-align: center;
+  max-width: 800px;
+  line-height: 1.4;
+  color: #111;
+}
+
+.modal-credit {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Responsive */
