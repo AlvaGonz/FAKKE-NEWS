@@ -126,26 +126,34 @@ function handleShare() {
   cursor: pointer;
 }
 
-.news-card::before {
-  content: '';
+/* Uiverse Shine Effect */
+.news-card::after {
+  content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), #ff6b6b);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  transition: none;
 }
 
 .news-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px var(--shadow-heavy);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
   border-color: var(--accent);
 }
 
-.news-card:hover::before {
-  transform: scaleX(1);
+.news-card:hover::after {
+  left: 150%;
+  transition: left 0.8s ease-in-out;
 }
 
 .card-image {

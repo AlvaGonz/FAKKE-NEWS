@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import AppHeader from '@/components/layout/AppHeader.vue'
+import { useEasterEggs } from '@/composables/useEasterEggs';
+
+const { init: initEasterEggs } = useEasterEggs();
+initEasterEggs();
 </script>
 
 <template>
