@@ -13,7 +13,7 @@ Una aplicación web moderna para consulta de noticias con diseño editorial insp
 - **PWA Ready** - Service Worker y manifest configurados
 
 ### Backend (ASP.NET Core)
-- **ASP.NET Core 8** - API REST moderna
+- **ASP.NET Core 9** - API REST moderna
 - **Entity Framework Core** - ORM para SQL Server
 - **CORS** - Configurado para SPA
 - **Swagger/Scalar** - Documentación automática de API
@@ -59,7 +59,7 @@ FAKKE NEWS/
 - **Git LFS** - Gestión de archivos grandes
 
 ### Backend
-- **ASP.NET Core 8** - Framework web
+- **ASP.NET Core 9** - Framework web
 - **Entity Framework Core** - ORM
 - **SQL Server** - Base de datos
 - **Swagger/Scalar** - Documentación API
